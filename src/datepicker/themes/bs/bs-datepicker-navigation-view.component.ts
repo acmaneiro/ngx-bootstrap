@@ -10,6 +10,7 @@ import {
   BsNavigationDirection,
   DaysCalendarViewModel
 } from '../../models/index';
+import { BsDatepickerConfig } from '../../bs-datepicker.config';
 
 @Component({
   selector: 'bs-datepicker-navigation-view',
@@ -39,17 +40,22 @@ import {
 })
 export class BsDatepickerNavigationViewComponent {
   @Input() calendar: DaysCalendarViewModel;
-
   @Output() onNavigate = new EventEmitter<BsNavigationDirection>();
-  @Output() onViewMode = new EventEmitter<BsDatepickerViewMode>();
-
+  @Output() onViewMode = new EventEmitter<BsDatepickerViewMode>();  
   navTo(down: boolean): void {
     this.onNavigate.emit(
       down ? BsNavigationDirection.DOWN : BsNavigationDirection.UP
     );
   }
+  config: BsDatepickerConfig;  
 
-  view(viewMode: BsDatepickerViewMode): void {
-    this.onViewMode.emit(viewMode);
+  view(viewMode: BsDatepickerViewMode): void {    
+    if(!this.config.disableMonthAndYearView){      
+      this.onViewMode.emit(viewMode);
+    }
+  }
+
+  constructor(private _config: BsDatepickerConfig){
+      this.config = _config;
   }
 }

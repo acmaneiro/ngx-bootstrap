@@ -49,4 +49,7 @@ export class BsDatepickerConfig
   monthLabel = 'MMMM';
   yearLabel = 'YYYY';
   weekNumbers = 'w';
+
+  // Disable Month and year view when click in buttons
+  disableMonthAndYearView = false;
 }
